@@ -6,7 +6,7 @@ use POE 0.38 qw(Wheel::Run Filter::Line Filter::Reference);
 use vars qw($VERSION);
 use Carp;
 
-$VERSION = '1.16';
+$VERSION = '1.18';
 
 sub spawn {
   my $package = shift;
@@ -190,12 +190,13 @@ sub _shorten_wheel {
   }
 }
 
-1;
+'snip';
+
 __END__
 
 =head1 NAME
 
-POE::Component::WWW::Shorten - A non-blocking wrapper around WWW::Shorten.
+POE::Component::WWW::Shorten - A non-blocking POE wrapper around WWW::Shorten.
 
 =head1 SYNOPSIS
 
@@ -247,7 +248,7 @@ If the type of shortening to do is not specified it uses the L<WWW::Shorten> def
 
 =over
 
-=item spawn
+=item C<spawn>
 
 Takes a number of arguments all are optional. Returns an object.
 
@@ -263,15 +264,15 @@ These are for the OO interface to the component.
 
 =over
 
-=item shorten
+=item C<shorten>
 
 Requires a hashref as first argument. See 'shorten' event below for details.
 
-=item session_id
+=item C<session_id>
 
 Takes no arguments. Returns the POE Session ID of the component.
 
-=item shutdown
+=item C<shutdown>
 
 Takes no arguments, terminates the component.
 
@@ -283,7 +284,7 @@ What POE events our component will accept.
 
 =over
 
-=item shorten
+=item C<shorten>
 
 Requires a hashref as first argument. The hashref should contain the following keyed values:
 
@@ -294,7 +295,7 @@ Requires a hashref as first argument. The hashref should contain the following k
 
 You may also pass arbitary key/values in the hashref ( as demonstrated in the SYNOPSIS ). Arbitary keys should have an underscore prefix '_'.
 
-=item shutdown
+=item C<shutdown>
 
 Takes no arguments, terminates the component.
 
@@ -315,7 +316,7 @@ Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
 
 =head1 LICENSE
 
-Copyright (C) Chris Williams
+Copyright E<copy> Chris Williams
 
 This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
@@ -324,3 +325,5 @@ This module may be used, modified, and distributed under the same terms as Perl 
 L<POE> 
 
 L<WWW::Shorten>
+
+=cut

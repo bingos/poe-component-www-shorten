@@ -1,12 +1,14 @@
+use strict;
 use inc::Module::Install;
 name 'POE-Component-WWW-Shorten';
 license 'perl';
 author 'Chris Williams <chris@bingosnet.co.uk>';
 version_from 'lib/POE/Component/WWW/Shorten.pm';
 abstract_from 'lib/POE/Component/WWW/Shorten.pm';
+perl_version '5.006';
+license 'perl';
 build_requires 'Test::More' => 0.47;
-requires 'warnings' => 0;
-requires 'Carp' => 0;
-requires 'POE' => 0.38;
-requires 'WWW::Shorten' => 1.95;
+requires 'POE' => 1.005;
+requires 'WWW::Shorten' => 1.98;
+eval "auto_set_repository";
 WriteAll();

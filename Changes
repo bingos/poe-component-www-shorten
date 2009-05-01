@@ -1,6 +1,10 @@
 POE::Component::WWW::Shorten
 ============================
 
+1.18	Fri May  1 07:11:28 BST 2009
+	- Tidied docs.
+	- Set repository META 
+
 1.16	Sat Jun 28 08:42:18 BST 2008
 	- Added LICENSE information.
 
