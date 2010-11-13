@@ -1,6 +1,8 @@
 POE::Component::WWW::Shorten
 ============================
 
+	- Added support for parameters of Shorten service (GETTY)
+
 1.18	Fri May  1 07:11:28 BST 2009
 	- Tidied docs.
 	- Set repository META 

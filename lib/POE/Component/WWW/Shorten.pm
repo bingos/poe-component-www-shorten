@@ -121,6 +121,8 @@ sub _shorten {
   else {
     $args->{sender} = $sender;
   }
+  
+  $args->{params} = $self->{params} ? $self->{params} : [];
 
   $kernel->refcount_increment( $args->{sender} => __PACKAGE__ );
   $self->{wheel}->put( $args );
@@ -183,7 +185,7 @@ sub _shorten_wheel {
   while ( sysread ( STDIN, $raw, $size ) ) {
     my $requests = $filter->get( [ $raw ] );
     foreach my $req ( @{ $requests } ) {
-        $req->{short} = makeashorterlink( $req->{url} );
+        $req->{short} = makeashorterlink( $req->{url}, @{$req->{params}} );
         my $response = $filter->put( [ $req ] );
         print STDOUT @$response;
     }
@@ -255,6 +257,7 @@ Takes a number of arguments all are optional. Returns an object.
   'alias', specify a POE Kernel alias for the component;
   'options', a hashref of POE Session options to pass to the component's session;
   'type', the WWW::Shorten sub module to use, default is 'Metamark';
+  'params', the parameter for the makeshortenlink call to WWW::Shorten;
 
 =back
 
