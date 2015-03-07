@@ -1,4 +1,0 @@
-POE::Component::WWW::Shorten
-============================
-
-A very simple non-blocking POE wrapper around WWW::Shorten.

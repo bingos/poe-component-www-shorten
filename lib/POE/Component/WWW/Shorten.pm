@@ -3,10 +3,7 @@ package POE::Component::WWW::Shorten;
 use strict;
 use warnings;
 use POE 0.38 qw(Wheel::Run Filter::Line Filter::Reference);
-use vars qw($VERSION);
 use Carp;
-
-$VERSION = '1.20';
 
 sub spawn {
   my $package = shift;
@@ -45,7 +42,7 @@ sub _start {
 
   if ( $self->{alias} ) {
 	$kernel->alias_set( $self->{alias} );
-  } 
+  }
   else {
 	$kernel->refcount_increment( $self->{session_id} => __PACKAGE__ );
   }
@@ -54,7 +51,7 @@ sub _start {
 	Program => \&_shorten_wheel,
 	ErrorEvent => '_child_error',
 	CloseEvent => '_child_closed',
-	StdoutEvent => '_child_stdout', 
+	StdoutEvent => '_child_stdout',
 	StderrEvent => '_child_stderr',
 	StdioFilter => POE::Filter::Reference->new(),
 	StderrFilter => POE::Filter::Line->new(),
@@ -121,7 +118,7 @@ sub _shorten {
   else {
     $args->{sender} = $sender;
   }
-  
+
   $args->{params} = $self->{params} ? $self->{params} : [];
 
   $kernel->refcount_increment( $args->{sender} => __PACKAGE__ );
@@ -171,7 +168,7 @@ sub _child_stdout {
 
   $kernel->post( $session, $event, $input );
   $kernel->refcount_decrement( $session => __PACKAGE__ );
-  undef;  
+  undef;
 }
 
 sub _shorten_wheel {
@@ -218,8 +215,8 @@ POE::Component::WWW::Shorten - A non-blocking POE wrapper around WWW::Shorten.
   sub _start {
 	my ($kernel,$heap) = @_[KERNEL,HEAP];
 
-	$kernel->post( 'shorten' => 'shorten' => 
-	  { 
+	$kernel->post( 'shorten' => 'shorten' =>
+	  {
 		url => 'http://reallyreallyreallyreally/long/url',
 		event => '_shortened',
 		_arbitary_value => 'whatever',
@@ -310,22 +307,12 @@ Whether the OO or POE API is used the component passes responses back via a POE 
 
   'url', the url that you wanted shortening.
   'short', the shortened version. ( This will be undef if something went wrong ).
-  
+
 The hashref will also contain any arbitary key/values that were passed in the original query.
-
-=head1 AUTHOR
-
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williams
-
-This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
 =head1 SEE ALSO
 
-L<POE> 
+L<POE>
 
 L<WWW::Shorten>
 
