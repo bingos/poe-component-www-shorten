@@ -1,5 +1,7 @@
 package POE::Component::WWW::Shorten;
 
+#ABSTRACT: A non-blocking POE wrapper around WWW::Shorten.
+
 use strict;
 use warnings;
 use POE 0.38 qw(Wheel::Run Filter::Line Filter::Reference);
@@ -13,7 +15,7 @@ sub spawn {
   $parms{ lc $_ } = delete $parms{$_} for keys %parms;
 
   delete $parms{'options'} unless ref ( $parms{'options'} ) eq 'HASH';
-  my $type = delete $parms{'type'} || 'Metamark';
+  my $type = delete $parms{'type'} || 'TinyURL';
 
   eval {
 	require WWW::Shorten;
@@ -191,11 +193,7 @@ sub _shorten_wheel {
 
 'snip';
 
-__END__
-
-=head1 NAME
-
-POE::Component::WWW::Shorten - A non-blocking POE wrapper around WWW::Shorten.
+=pod
 
 =head1 SYNOPSIS
 
@@ -241,7 +239,7 @@ POE::Component::WWW::Shorten - A non-blocking POE wrapper around WWW::Shorten.
 POE::Component::WWW::Shorten is a L<POE> component that provides a non-blocking wrapper around
 L<WWW::Shorten>. It accepts 'shorten' events and will return a shortened url.
 
-If the type of shortening to do is not specified it uses the L<WWW::Shorten> default which is L<WWW::Shorten::Metamark>.
+If the type of shortening to do is not specified it uses the L<WWW::Shorten> default which is L<WWW::Shorten::TinyURL>.
 
 =head1 CONSTRUCTOR
 
@@ -253,7 +251,7 @@ Takes a number of arguments all are optional. Returns an object.
 
   'alias', specify a POE Kernel alias for the component;
   'options', a hashref of POE Session options to pass to the component's session;
-  'type', the WWW::Shorten sub module to use, default is 'Metamark';
+  'type', the WWW::Shorten sub module to use, default is 'TinyURL';
   'params', the parameter for the makeshortenlink call to WWW::Shorten;
 
 =back
